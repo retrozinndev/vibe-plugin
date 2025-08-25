@@ -1,2 +1,11 @@
-# vibe-plugin-local
-[In development] A local-source plugin for the Vibe Music Player
+# vibe-plugin
+A Vibe Plugin project template.
+
+## 🛠️ Development
+- Build(default output: `build/plugin.js`):
+```zsh
+pnpm build
+```
+- Testing
+> [!note]
+> TODO
