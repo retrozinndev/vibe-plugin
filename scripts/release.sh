@@ -29,6 +29,6 @@ done
 
 
 sh ./scripts/build.sh -o "${outdir:-./build/release}" \
-    -r "${gresource_file:-/usr/share/vibe/resources.gresource}"
+    -r "${gresource_file:-/usr/share/vibe/resources.gresource}" \
     "$([[ "$compile_gresource" ]] && echo -n "-g")"
 

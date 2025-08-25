@@ -41,6 +41,13 @@ sh ./scripts/clean.sh $output
 
 mkdir -p $output
 
+# find project root from the $output directory
+project_root="."
+while [[ ! `ls -w1 "$output/$project_root"` =~ package.json|pnpm-lock.yaml ]]; do
+    project_root="$project_root/.."
+done
+
+
 if [[ "$compile_gresource" ]]; then
     echo "[info] compiling gresource"
     glib-compile-resources resources.gresource.xml \
@@ -49,10 +56,10 @@ if [[ "$compile_gresource" ]]; then
 fi
 
 echo "[info] bundling plugin"
-find ./src/**/*.ts* | sed -e 's/.*/import ".&";/' > $output/concat.ts
+find ./src/*.ts | sed -e 's/.*/import "'${project_root//\//\\/}'\/&";/' > $output/concat.ts
 esbuild --bundle $output/concat.ts \
     --outfile=$output/plugin.js \
-    --source-root=./src \
+    --source-root=src \
     --sourcemap=inline \
     --format="esm" \
     --target=firefox128 \
