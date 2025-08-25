@@ -16,3 +16,5 @@ Example:
     </gresource>
 </gresources>
 ```
+
+Also, on compile time, don't forget to add the `-g` flag, if you want to build the gresource too.
