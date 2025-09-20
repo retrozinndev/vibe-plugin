@@ -68,7 +68,8 @@ esbuild --bundle $output/concat.ts \
     --external:"console" \
     --external:"system" \
     --external:"gettext" \
+    --external:"libvibe" \
     --define:"DEVEL=`[[ $is_devel ]] && echo -n true || echo -n false`" \
     --define:"VIBE_PLUGIN_VERSION='`cat package.json | jq -r .version`'" \
-    --define:"GRESOURCES_FILE='${gresources_target:-$output/resources.gresource}'" 
-
+    --define:"GRESOURCES_FILE='${gresources_target:-$output/resources.gresource}'" && \
+  sed -i -E 's/(.*)window.plugin = VibePlugin;/\1/g' $output/plugin.js # remove dummy plugin reference

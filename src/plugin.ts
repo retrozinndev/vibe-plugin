@@ -1,24 +1,28 @@
 import Gio from "gi://Gio?version=2.0";
 
 import { Plugin } from "libvibe";
-import { Section } from "libvibe/src/vibe";
+import { Section } from "libvibe";
 
 
-export default class extends Plugin {
+// For Vibe to detect the plugin's code, its class must be implemented as `default`
+// also, you may not change the plugin's class name, use the `name` prop instead.
+// otherwise, Vibe won't detect the plugin!
+class VibePlugin extends Plugin {
     constructor() {
         super({
-            name: "Vibe Plugin",
-            version: VIBE_PLUGIN_VERSION,
-            description: "A nice plugin for the Vibe Music Player!",
-            url: "https://github.com/retrozinndev/vibe-plugin",
-            implements: {
+            name: "Vibe Plugin", // plugin name
+            version: VIBE_PLUGIN_VERSION, // plugin version (retrieved from package.json automatically on compile-time, no need to change this)
+            description: "A nice plugin for the Vibe Music Player!", // description of the plugin
+            url: "https://github.com/retrozinndev/vibe-plugin", // url where you can get more info about the plugin(or its repo)
+            implements: { // features that the plugin implement
                 sections: true
             }
         });
     }
 
+    // the sections feature should be implemented like this:
     getSections(_length?: number): Array<Section> | null {
-        return [
+        return [ // example sections
             {
                 title: "Section 1",
                 description: "This section is pretty nice!",
@@ -37,3 +41,8 @@ export default class extends Plugin {
         ];
     }
 }
+
+
+// register plugin on `window` object, so esbuild doesn't remove it
+// @ts-ignore
+window.plugin = VibePlugin;
