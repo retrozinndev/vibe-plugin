@@ -1,7 +1,6 @@
 import Gio from "gi://Gio?version=2.0";
 
-import { Plugin } from "libvibe";
-import { Section } from "libvibe";
+import { Plugin, Section } from "libvibe";
 
 
 // For Vibe to detect the plugin's code, its class must be implemented as `default`
