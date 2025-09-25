@@ -69,6 +69,7 @@ esbuild --bundle $output/concat.ts \
     --external:"system" \
     --external:"gettext" \
     --external:"libvibe" \
+    --external:"gnim" \
     --define:"DEVEL=`[[ $is_devel ]] && echo -n true || echo -n false`" \
     --define:"VIBE_PLUGIN_VERSION='`cat package.json | jq -r .version`'" \
     --define:"GRESOURCES_FILE='${gresources_target:-$output/resources.gresource}'" && \

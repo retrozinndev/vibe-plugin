@@ -1,11 +1,13 @@
 import Gio from "gi://Gio?version=2.0";
 
 import { Plugin, Section } from "libvibe";
+import { register } from "gnim/gobject";
 
 
 // For Vibe to detect the plugin's code, its class must be implemented as `default`
 // also, you may not change the plugin's class name, use the `name` prop instead.
 // otherwise, Vibe won't detect the plugin!
+@register() // register plugin in GObject
 class VibePlugin extends Plugin {
     constructor() {
         super({
@@ -43,5 +45,6 @@ class VibePlugin extends Plugin {
 
 
 // register plugin on `window` object, so esbuild doesn't remove it
+// this is development only: the final build won't have this line.
 // @ts-ignore
 window.plugin = VibePlugin;
