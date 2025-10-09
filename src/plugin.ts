@@ -1,6 +1,6 @@
 import Gio from "gi://Gio?version=2.0";
 
-import { Plugin, Section } from "libvibe";
+import { Plugin, Section, Vibe } from "libvibe";
 import { register } from "gnim/gobject";
 
 
@@ -28,11 +28,14 @@ class VibePlugin extends Plugin {
                 title: "Section 1",
                 description: "This section is pretty nice!",
                 headerButtons: [{
+                    id: Vibe.getDefault().generateID(), // or another preferred ID
                     label: "See developer's website",
-                    onClicked: () => Gio.Subprocess.new([
-                        "xdg-open",
-                        "https://retrozinndev.github.io"
-                    ], Gio.SubprocessFlags.NONE)
+                    onClicked: () => {
+                        Gio.Subprocess.new([
+                            "xdg-open",
+                            "https://retrozinndev.github.io"
+                        ], Gio.SubprocessFlags.NONE);
+                    }
                 }]
             },
             {

@@ -21,6 +21,6 @@
   "packageManager": "pnpm@10.12.1",
   "dependencies": {
     "gnim": "^1.6.3",
-    "libvibe": "link:./lib"
+    "libvibe": "github:retrozinndev/libvibe"
   }
 }
