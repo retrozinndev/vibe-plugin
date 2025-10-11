@@ -1,8 +1,6 @@
 import Gio from "gi://Gio?version=2.0";
-
-import { Plugin, Section, Vibe } from "libvibe";
 import { register } from "gnim/gobject";
-
+const { Plugin, Vibe } = libvibe;
 
 // For Vibe to detect the plugin's code, its class must be implemented as `default`
 // also, you may not change the plugin's class name, use the `name` prop instead.
@@ -22,7 +20,7 @@ class VibePlugin extends Plugin {
     }
 
     // the sections feature should be implemented like this:
-    getSections(_length?: number): Array<Section> | null {
+    getSections(_length?: number) {
         return [ // example sections
             {
                 title: "Section 1",
