@@ -1,5 +1,6 @@
 set -e
 
+plugin_name=`cat ./package.json | jq -r .name`
 output="./build"
 
 while getopts r:o:dhg args; do
@@ -72,5 +73,6 @@ esbuild --bundle $output/concat.ts \
     --external:"gnim" \
     --define:"DEVEL=`[[ $is_devel ]] && echo -n true || echo -n false`" \
     --define:"VIBE_PLUGIN_VERSION='`cat package.json | jq -r .version`'" \
-    --define:"GRESOURCES_FILE='${gresources_target:-$output/resources.gresource}'" && \
-  sed -i -E 's/(.*)window.plugin = VibePlugin;/\1/g' $output/plugin.js # remove dummy plugin reference
+    --define:"GRESOURCES_FILE=\"${gresources_target:-"\$XDG_CONFIG_HOME/vibe/$plugin_name/resources.gresource"}\"" && \
+  sed -i -E 's/(.*)window\.plugin = VibePlugin;/\1/g' $output/plugin.js && \
+  sed -i -E 's/class .*VibePlugin/export &/' $output/plugin.js
