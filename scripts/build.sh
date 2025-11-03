@@ -75,4 +75,4 @@ esbuild --bundle $output/concat.ts \
     --define:"VIBE_PLUGIN_VERSION='`cat package.json | jq -r .version`'" \
     --define:"GRESOURCES_FILE=\"${gresources_target:-"\$XDG_CONFIG_HOME/vibe/$plugin_name/resources.gresource"}\"" && \
   sed -i -E 's/(.*)window\.plugin = VibePlugin;/\1/g' $output/plugin.js && \
-  sed -i -E 's/class .*VibePlugin/export &/' $output/plugin.js
+  sed -i -E 's/var VibePlugin = (.*)/export default VibePlugin = \1/' $output/plugin.js
