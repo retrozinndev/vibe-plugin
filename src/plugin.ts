@@ -1,6 +1,9 @@
 import Gio from "gi://Gio?version=2.0";
 import { register } from "gnim/gobject";
-const { Plugin, Vibe } = libvibe;
+
+import { Plugin } from "libvibe/plugin";
+import { Vibe } from "libvibe";
+
 
 // For Vibe to detect the plugin's code, its class must be implemented as `default`
 // also, you may not change the plugin's class name, use the `name` prop instead.
