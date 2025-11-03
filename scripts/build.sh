@@ -69,11 +69,11 @@ esbuild --bundle $output/concat.ts \
     --external:"console" \
     --external:"system" \
     --external:"gettext" \
-    --external:"libvibe" \
     --external:"gnim" \
+    --external:"libvibe" \
     --define:"DEVEL=`[[ $is_devel ]] && echo -n true || echo -n false`" \
     --define:"VIBE_PLUGIN_VERSION='`cat package.json | jq -r .version`'" \
     --define:"GRESOURCES_FILE=\"${gresources_target:-"\$XDG_CONFIG_HOME/vibe/$plugin_name/resources.gresource"}\"" && \
   sed -i -E 's/(.*)window\.plugin = VibePlugin;/\1/g' $output/plugin.js && \
-  sed -i -E 's/var VibePlugin = (.*)/export default VibePlugin = \1/' $output/plugin.js && \
-  sed -i -E 's/^import .* from "libvibe.*"(;)?$//' $output/plugin.js
+  sed -i -E 's/var VibePlugin = (.*)/export default VibePlugin = \1/g' $output/plugin.js && \
+  sed -i -E 's/^(import|export) .* from "(libvibe|gnim).*"(;)?$//g' $output/plugin.js
