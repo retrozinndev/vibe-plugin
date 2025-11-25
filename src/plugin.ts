@@ -5,11 +5,11 @@ import { Plugin } from "libvibe/plugin";
 import { Vibe } from "libvibe";
 
 
-// For Vibe to detect the plugin's code, its class must be implemented as `default`
+// For Vibe to detect the plugin's code, its class must be implemented as VibePlugin
 // also, you may not change the plugin's class name, use the `name` prop instead.
 // otherwise, Vibe won't detect the plugin!
 @register() // register plugin in GObject
-class VibePlugin extends Plugin {
+export class VibePlugin extends Plugin {
     constructor() {
         super({
             name: "Vibe Plugin", // plugin name
@@ -46,9 +46,3 @@ class VibePlugin extends Plugin {
         ];
     }
 }
-
-
-// register plugin on `window` object, so esbuild doesn't remove it
-// this is development only: the final build won't have this line.
-// @ts-ignore
-window.plugin = VibePlugin;
