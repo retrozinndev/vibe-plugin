@@ -6,8 +6,6 @@
   "description": "A nice plugin for the Vibe Music Player!",
   "scripts": {
     "build": "sh ./scripts/build.sh",
-    "build:release": "sh ./scripts/release.sh",
-    "release": "sh ./scripts/release.sh",
     "clean": "sh ./scripts/clean.sh",
     "types": "sh ./scripts/types.sh"
   },
@@ -20,7 +18,9 @@
   "license": "MIT",
   "packageManager": "pnpm@10.12.1",
   "peerDependencies": {
-    "gnim": "^1.8.2",
     "libvibe": "github:retrozinndev/libvibe"
+  },
+  "dependencies": {
+    "gnim": "^1.8.2"
   }
 }

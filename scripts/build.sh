@@ -48,9 +48,10 @@ if [[ $compile_gresource ]]; then
         --target "$output/resources.gresource"
 fi
 
+outfile="$output/plugin.js"
 echo "[info] bundling plugin"
 esbuild --bundle ./src/plugin.ts \
-    --outfile=$output/plugin.js \
+    --outfile=$outfile \
     --source-root=src \
     --sourcemap=inline \
     --format="esm" \
@@ -64,7 +65,7 @@ esbuild --bundle ./src/plugin.ts \
     --external:"libvibe" \
     --define:"DEVEL=`[[ $is_devel ]] && echo -n true || echo -n false`" \
     --define:"VIBE_PLUGIN_VERSION='`cat package.json | jq -r .version`'" \
-    --define:"GRESOURCES_FILE=\"${gresources_target:-"\$XDG_CONFIG_HOME/vibe/$plugin_name/resources.gresource"}\"" && \
-  sed -i -E 's/(.*)window\.plugin = VibePlugin;/\1/g' $output/plugin.js && \
-  sed -i -E 's/var VibePlugin = (.*)/export default VibePlugin = \1/g' $output/plugin.js && \
-  sed -i -E 's/^(import|export) .* from "(libvibe|gnim).*"(;)?$//g' $output/plugin.js
+    --define:"GRESOURCES_FILE=\"${gresources_target:-"\$XDG_CONFIG_HOME/vibe/$plugin_name/resources.gresource"}\""
+
+echo "[info] overriding libvibe imports"
+gjs -m ./scripts/override.js $outfile
