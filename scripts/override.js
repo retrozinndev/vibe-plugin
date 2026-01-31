@@ -1,4 +1,3 @@
-// @ts-check
 import Gio from "gi://Gio?version=2.0";
 
 // This overrides the imports of the plugin output to the 
@@ -36,6 +35,9 @@ const finalContent = content.replace(
                 path.replace('/', '.')
             : ".vibe"}`;
     }
+).replace(
+    /var VibePlugin/,
+    "export var VibePlugin"
 );
 
 file.replace_contents(
