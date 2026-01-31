@@ -1,6 +1,5 @@
 import Gio from "gi://Gio?version=2.0";
 import { register } from "gnim/gobject";
-
 import { Plugin } from "libvibe/plugin";
 import { Vibe } from "libvibe";
 
@@ -8,22 +7,22 @@ import { Vibe } from "libvibe";
 // For Vibe to detect the plugin's code, its class must be implemented as VibePlugin
 // also, you may not change the plugin's class name, use the `name` prop instead.
 // otherwise, Vibe won't detect the plugin!
-@register() // register plugin in GObject
+@register() // register plugin in GObject for it to work
 export class VibePlugin extends Plugin {
     constructor() {
         super({
             name: "Vibe Plugin", // plugin name
             version: VIBE_PLUGIN_VERSION, // plugin version (retrieved from package.json automatically on compile-time, no need to change this)
             description: "A nice plugin for the Vibe Music Player!", // description of the plugin
-            url: "https://github.com/retrozinndev/vibe-plugin", // url where you can get more info about the plugin(or its repo)
+            url: "https://github.com/retrozinndev/vibe-plugin", // url where you can get more info about the plugin / its repo
             implements: { // features that the plugin implement
-                sections: true
+                recommendations: true // this plugin 
             }
         });
     }
 
     // the sections feature should be implemented like this:
-    getSections(_length?: number) {
+    getRecommendations(_length?: number) {
         return [ // example sections
             {
                 title: "Section 1",
