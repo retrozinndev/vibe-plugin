@@ -17,10 +17,8 @@
   "author": "",
   "license": "MIT",
   "packageManager": "pnpm@10.12.1",
-  "peerDependencies": {
-    "libvibe": "github:retrozinndev/libvibe"
-  },
   "dependencies": {
-    "gnim": "^1.8.2"
+    "gnim": "^1.8.2",
+    "libvibe": "github:retrozinndev/libvibe"
   }
 }
