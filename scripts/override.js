@@ -35,9 +35,6 @@ const finalContent = content.replace(
                 path.replace('/', '.')
             : ".vibe"}`;
     }
-).replace(
-    /var VibePlugin/,
-    "export var VibePlugin"
 );
 
 file.replace_contents(
